@@ -1,4 +1,4 @@
-# escape-sql-string [![build status](https://secure.travis-ci.org/thlorenz/sql-escape-string.svg?branch=master)](http://travis-ci.org/thlorenz/sql-escape-string)
+# escape-sql-string ![ci](https://github.com/jackall3n/escape-sql-string/actions/workflows/ci.yml/badge.svg)
 
 Simple SQL string escape.
 
