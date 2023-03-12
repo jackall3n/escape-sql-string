@@ -1,4 +1,4 @@
-# escape-sql-string ![ci](https://github.com/jackall3n/escape-sql-string/actions/workflows/ci.yml/badge.svg)
+# escape-sql-string ![ci](https://github.com/jackall3n/escape-sql-string/actions/workflows/ci.yaml/badge.svg)
 
 Simple SQL string escape.
 
