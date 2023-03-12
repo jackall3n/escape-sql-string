@@ -1,15 +1,15 @@
-const CHARS_GLOBAL_BACKSLASH_SUPPORTED_RX = /[\0\b\t\n\r\x1a"'\\]/g
-const CHARS_ESCAPE_BACKSLASH_SUPPORTED_MAP = {
-  '\0': '\\0'
-  , '\b': '\\b'
-  , '\t': '\\t'
-  , '\n': '\\n'
-  , '\r': '\\r'
-  , '\x1a': '\\Z'
-  , '"': '\\"'
-  , '\'': '\\\''
-  , '\\': '\\\\'
-}
+const CHARS_GLOBAL_BACKSLASH_SUPPORTED_RX = /[\0\b\t\n\r\x1a"'\\]/g;
+const CHARS_ESCAPE_BACKSLASH_SUPPORTED_MAP: Record<string, string> = {
+  "\0": "\\0",
+  "\b": "\\b",
+  "\t": "\\t",
+  "\n": "\\n",
+  "\r": "\\r",
+  "\x1a": "\\Z",
+  '"': '\\"',
+  "'": "\\'",
+  "\\": "\\\\",
+};
 
 export interface Options {
   backslashSupported?: boolean;
@@ -41,39 +41,41 @@ export interface Options {
  */
 export default function escapeString(value: string, options: Options = {}) {
   if (value == null) {
-    throw new Error('Need to pass a valid string')
+    throw new Error("Need to pass a valid string");
   }
 
-  const backslashSupported = !!options.backslashSupported
+  const backslashSupported = !!options.backslashSupported;
 
   if (!backslashSupported) {
-    return wrap(value.replace(/'/g, "''"))
+    return wrap(value.replace(/'/g, "''"));
   }
 
-  const charsRx = CHARS_GLOBAL_BACKSLASH_SUPPORTED_RX
-  const charsEscapeMap = CHARS_ESCAPE_BACKSLASH_SUPPORTED_MAP
+  const charsRx = CHARS_GLOBAL_BACKSLASH_SUPPORTED_RX;
+  const charsEscapeMap = CHARS_ESCAPE_BACKSLASH_SUPPORTED_MAP;
 
-  let chunkIndex = charsRx.lastIndex = 0
-  let escapedValue = ''
-  let match
+  let chunkIndex = (charsRx.lastIndex = 0);
+  let escapedValue = "";
+  let match;
 
   while ((match = charsRx.exec(value))) {
-    escapedValue += value.slice(chunkIndex, match.index) + charsEscapeMap[match[0]]
-    chunkIndex = charsRx.lastIndex
+    const t = match[0];
+
+    escapedValue += value.slice(chunkIndex, match.index) + charsEscapeMap[t];
+    chunkIndex = charsRx.lastIndex;
   }
 
   // Nothing was escaped
   if (chunkIndex === 0) {
-    return wrap(value)
+    return wrap(value);
   }
 
   if (chunkIndex < value.length) {
-    return wrap(escapedValue + value.slice(chunkIndex))
+    return wrap(escapedValue + value.slice(chunkIndex));
   }
 
   return wrap(escapedValue);
 }
 
 function wrap(value: string) {
-  return `'${value}'`
+  return `'${value}'`;
 }

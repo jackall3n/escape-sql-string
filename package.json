@@ -1,14 +1,15 @@
 {
   "name": "escape-sql-string",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Simple SQL string escape.",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "escape-sql-string.js"
   ],
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "tsc"
   },
   "devDependencies": {
     "@babel/core": "^7.21.0",
